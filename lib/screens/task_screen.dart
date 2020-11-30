@@ -116,7 +116,7 @@ class _TaskScreenState extends State<TaskScreen> {
                               "Visit 5 pages",
                               style: TextStyle(
                                 color: Color(0xFF41438F),
-                                fontWeight: FontWeight.w600,
+                                fontWeight: FontWeight.w700,
                                 fontSize: 15,
                               ),
                             ),
@@ -175,7 +175,7 @@ class _TaskScreenState extends State<TaskScreen> {
                         "Complete Task",
                         style: TextStyle(
                           color: Color(0xFF41438F),
-                          fontWeight: FontWeight.w600,
+                          fontWeight: FontWeight.w700,
                           fontSize: 14,
                         ),
                       ),
