@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:uiux1_demo/screens/dashboard.dart';
+import 'package:uiux1_demo/screens/news_feed/add_news_feed.dart';
+import 'package:uiux1_demo/screens/news_feed/news_feed.dart';
 import 'package:uiux1_demo/screens/task_screen.dart';
 
 void main() => runApp(MyApp());
@@ -13,6 +15,8 @@ class MyApp extends StatelessWidget {
       routes: {
         '/' : (context) => Dashboard(),
         '/taskScreen' : (context) => TaskScreen(),
+        '/newsFeed' : (context) => NewsFeed(),
+        '/addNewsFeed' : (context) => AddNewsFeed(),
       },
     );
   }

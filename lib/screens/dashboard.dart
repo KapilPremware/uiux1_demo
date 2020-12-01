@@ -15,7 +15,9 @@ class _DashboardState extends State<Dashboard> {
       ),
       body: Container(
         padding: EdgeInsets.all(20),
-        child: Column(
+        child: Wrap(
+          runSpacing: 10,
+          spacing: 10,
           children: [
             InkWell(
               onTap: (){
@@ -25,7 +27,24 @@ class _DashboardState extends State<Dashboard> {
                 padding: EdgeInsets.all(20),
                 color: Colors.blueAccent,
                 child: Text(
-                  "Task Screen 1",
+                  "Task Screen",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w600,
+                    fontSize: 18,
+                  ),
+                ),
+              ),
+            ),
+            InkWell(
+              onTap: (){
+                Navigator.pushNamed(context, '/newsFeed');
+              },
+              child: Container(
+                padding: EdgeInsets.all(20),
+                color: Colors.blueAccent,
+                child: Text(
+                  "News Feed",
                   style: TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.w600,
