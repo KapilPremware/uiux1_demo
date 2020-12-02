@@ -87,6 +87,23 @@ class _DashboardState extends State<Dashboard> {
                 ),
               ),
             ),
+            InkWell(
+              onTap: (){
+                Navigator.pushNamed(context, '/scrollToLoad');
+              },
+              child: Container(
+                padding: EdgeInsets.all(20),
+                color: Colors.blueAccent,
+                child: Text(
+                  "Scroll To Load",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w600,
+                    fontSize: 18,
+                  ),
+                ),
+              ),
+            ),
           ],
         ),
       ),
