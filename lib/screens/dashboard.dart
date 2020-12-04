@@ -155,6 +155,23 @@ class _DashboardState extends State<Dashboard> {
                 ),
               ),
             ),
+            InkWell(
+              onTap: (){
+                Navigator.pushNamed(context, '/scratchList');
+              },
+              child: Container(
+                padding: EdgeInsets.all(20),
+                color: Colors.blueAccent,
+                child: Text(
+                  "scratch Card",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w600,
+                    fontSize: 18,
+                  ),
+                ),
+              ),
+            ),
           ],
         ),
       ),
