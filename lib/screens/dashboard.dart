@@ -121,6 +121,40 @@ class _DashboardState extends State<Dashboard> {
                 ),
               ),
             ),
+            InkWell(
+              onTap: (){
+                Navigator.pushNamed(context, '/sliverAppbar');
+              },
+              child: Container(
+                padding: EdgeInsets.all(20),
+                color: Colors.blueAccent,
+                child: Text(
+                  "sliver AppBar",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w600,
+                    fontSize: 18,
+                  ),
+                ),
+              ),
+            ),
+            InkWell(
+              onTap: (){
+                Navigator.pushNamed(context, '/appBarTabBar');
+              },
+              child: Container(
+                padding: EdgeInsets.all(20),
+                color: Colors.blueAccent,
+                child: Text(
+                  "AppBar TabBar",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w600,
+                    fontSize: 18,
+                  ),
+                ),
+              ),
+            ),
           ],
         ),
       ),
