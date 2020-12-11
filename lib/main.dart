@@ -10,6 +10,8 @@ import 'package:uiux1_demo/screens/avatar_selection.dart';
 import 'package:uiux1_demo/screens/sliver_appbar.dart';
 import 'package:uiux1_demo/screens/appbar_tabbar.dart';
 import 'package:uiux1_demo/screens/scratch_list.dart';
+import 'package:uiux1_demo/screens/refer.dart';
+import 'package:uiux1_demo/screens/withdraw.dart';
 
 void main() => runApp(MyApp());
 
@@ -32,6 +34,8 @@ class MyApp extends StatelessWidget {
         '/sliverAppbar' : (context) => SliverAppBarScreen(),
         '/appBarTabBar' : (context) => AppBarTabBar(),
         '/scratchList' : (context) => ScratchList(),
+        '/refer' : (context) => Refer(),
+        '/withdraw' : (context) => Withdraw(),
       },
     );
   }
