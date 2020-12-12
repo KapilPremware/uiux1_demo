@@ -13,6 +13,7 @@ import 'package:uiux1_demo/screens/scratch_list.dart';
 import 'package:uiux1_demo/screens/refer.dart';
 import 'package:uiux1_demo/screens/withdraw.dart';
 import 'package:uiux1_demo/screens/notification.dart';
+import 'package:uiux1_demo/screens/sqflite_localdb/sqflite_localdb.dart';
 
 void main() => runApp(MyApp());
 
@@ -38,6 +39,7 @@ class MyApp extends StatelessWidget {
         '/refer' : (context) => Refer(),
         '/withdraw' : (context) => Withdraw(),
         '/notification' : (context) => AppNotification(),
+        '/sqfLite_localdb' : (context) => SQFLiteLocalDB(),
       },
     );
   }

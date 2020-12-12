@@ -223,6 +223,23 @@ class _DashboardState extends State<Dashboard> {
                 ),
               ),
             ),
+            InkWell(
+              onTap: (){
+                Navigator.pushNamed(context, '/sqfLite_localdb');
+              },
+              child: Container(
+                padding: EdgeInsets.all(20),
+                color: Colors.blueAccent,
+                child: Text(
+                  "sqfLite",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w600,
+                    fontSize: 18,
+                  ),
+                ),
+              ),
+            ),
           ],
         ),
       ),
