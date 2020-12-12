@@ -197,7 +197,24 @@ class _DashboardState extends State<Dashboard> {
                 padding: EdgeInsets.all(20),
                 color: Colors.blueAccent,
                 child: Text(
-                  "redeem",
+                  "Redeem",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w600,
+                    fontSize: 18,
+                  ),
+                ),
+              ),
+            ),
+            InkWell(
+              onTap: (){
+                Navigator.pushNamed(context, '/notification');
+              },
+              child: Container(
+                padding: EdgeInsets.all(20),
+                color: Colors.blueAccent,
+                child: Text(
+                  "Notification",
                   style: TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.w600,

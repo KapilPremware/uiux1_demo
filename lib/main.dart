@@ -12,6 +12,7 @@ import 'package:uiux1_demo/screens/appbar_tabbar.dart';
 import 'package:uiux1_demo/screens/scratch_list.dart';
 import 'package:uiux1_demo/screens/refer.dart';
 import 'package:uiux1_demo/screens/withdraw.dart';
+import 'package:uiux1_demo/screens/notification.dart';
 
 void main() => runApp(MyApp());
 
@@ -36,6 +37,7 @@ class MyApp extends StatelessWidget {
         '/scratchList' : (context) => ScratchList(),
         '/refer' : (context) => Refer(),
         '/withdraw' : (context) => Withdraw(),
+        '/notification' : (context) => AppNotification(),
       },
     );
   }
