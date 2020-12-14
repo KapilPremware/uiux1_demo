@@ -9,19 +9,31 @@ class SQFLiteLocalDB extends StatefulWidget {
 
 class _SQFLiteLocalDBState extends State<SQFLiteLocalDB> {
   TextEditingController txtName = TextEditingController();
+  var formKey = GlobalKey<FormState>();
 
   List dataList = [];
+  bool isEdit = false;
+  int editId = 0;
+
   @override
   void initState() {
     // TODO: implement initState
-    getData();
+    refreshData();
     super.initState();
   }
 
-  void getData() async{
+  void refreshData() async {
     var data = await DatabaseHelper.instance.queryAll();
     setState(() {
       dataList = data;
+    });
+  }
+
+  void clearAll(){
+    setState(() {
+      txtName.clear();
+      isEdit = false;
+      editId = 0;
     });
   }
 
@@ -36,60 +48,96 @@ class _SQFLiteLocalDBState extends State<SQFLiteLocalDB> {
         width: MediaQuery.of(context).size.width,
         child: Column(
           children: [
-            TextFormField(
-              controller: txtName,
+            Form(
+              key: formKey,
+              child: Column(
+                children: [
+                  TextFormField(
+                    controller: txtName,
+                    validator: (val) {
+                      if (val.isEmpty)
+                        return 'Enter value';
+                      else
+                        return null;
+                    },
+                  ),
+                  Row(
+                    children: [
+                      FlatButton(
+                        onPressed: () async {
+                          clearAll();
+                        },
+                        child: Text("Cancel"),
+                        color: Colors.blue,
+                      ),
+                      SizedBox(width: 10),
+                      FlatButton(
+                        onPressed: () async {
+                          if (formKey.currentState.validate()) {
+                            if(isEdit){
+                              int i = await DatabaseHelper.instance.update({
+                                "_id": editId,
+                                "name": txtName.text,
+                              });
+                              print("the inserted id is $i");
+                            } else{
+                              int i = await DatabaseHelper.instance.insert({
+                                "name": txtName.text,
+                              });
+                              print("the inserted id is $i");
+                            }
+                            clearAll();
+                            refreshData();
+                          }
+                        },
+                        child: Text("${isEdit ? 'Update' : 'Insert'}"),
+                        color: Colors.green,
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
             SizedBox(height: 20),
             Expanded(
               child: ListView.builder(
                 itemCount: dataList.length,
-                itemBuilder: (BuildContext context, int index){
+                itemBuilder: (BuildContext context, int index) {
                   return Row(
                     children: [
-                      Text("${dataList[index]["name"]}"),
-                      Icon(Icons.delete),
+                      Expanded(
+                        child: InkWell(
+                          onTap: (){
+
+                          },
+                          child: Text(
+                            "${dataList[index]["_id"]} ${dataList[index]["name"]}",
+                          ),
+                        ),
+                      ),
+                      IconButton(
+                        icon: Icon(Icons.edit, color: Colors.grey,),
+                        onPressed: () async {
+                          setState(() {
+                            isEdit = true;
+                            editId = dataList[index]["_id"];
+                            txtName.text = dataList[index]["name"];
+                          });
+                        },
+                      ),
+                      IconButton(
+                        icon: Icon(Icons.delete, color: Colors.red,),
+                        onPressed: () async {
+                          int i = await DatabaseHelper.instance
+                              .delete(dataList[index]["_id"]);
+                          print("the deleted id is $i");
+                          refreshData();
+                        },
+                      ),
                     ],
                   );
                 },
               ),
-            ),
-            FlatButton(
-              onPressed: () async {
-                int i = await DatabaseHelper.instance.insert({
-                  "name": "Kapil",
-                });
-                print("the inserted id is $i");
-              },
-              child: Text("Insert"),
-              color: Colors.grey,
-            ),
-            FlatButton(
-              onPressed: () async {
-                List<Map<String, dynamic>> data =
-                    await DatabaseHelper.instance.queryAll();
-                print(data);
-              },
-              child: Text("List"),
-              color: Colors.green,
-            ),
-            FlatButton(
-              onPressed: () async {
-                int i = await DatabaseHelper.instance.update({
-                  "_id": 1,
-                  "name": "Rajesh",
-                });
-                print("the updated id is $i");
-              },
-              child: Text("Update"),
-              color: Colors.blue,
-            ),
-            FlatButton(
-              onPressed: () async {
-                int i = await DatabaseHelper.instance.delete(1);
-                print("the deleted id is $i");
-              },
-              child: Text("Delete"),
-              color: Colors.red,
             ),
           ],
         ),

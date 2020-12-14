@@ -1,5 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:uiux1_demo/model/feed.dart';
+import 'package:uiux1_demo/provider/feed_provider.dart';
 
 class NewsFeed extends StatefulWidget {
   @override
@@ -7,15 +10,68 @@ class NewsFeed extends StatefulWidget {
 }
 
 class _NewsFeedState extends State<NewsFeed> {
+  List dataList = [
+    {
+      "id": "1",
+      "userId" : "1",
+      "name": "Kapil R Singh",
+      "img": "https://randomuser.me/api/portraits/women/17.jpg",
+      "banner":
+          "https://cdn.searchenginejournal.com/wp-content/uploads/2019/05/facebookvideoranking.png",
+      "dec":
+          "Our goal with News Feed is to show you the stories that matter most to you, every time you visit Facebook.",
+      "date": DateTime.now(),
+      "like": false,
+    },
+    {
+      "id": "2",
+      "userId" : "1",
+      "name": "Kapil R Singh",
+      "img": "https://randomuser.me/api/portraits/women/17.jpg",
+      "banner":
+      "https://cdn.searchenginejournal.com/wp-content/uploads/2019/05/facebookvideoranking.png",
+      "dec":
+      "Our goal with News Feed is to show you the stories that matter most to you, every time you visit Facebook.",
+      "date": DateTime.now(),
+      "like": false,
+    },
+    {
+      "id": "3",
+      "userId" : "2",
+      "name": "Kapil R Singh",
+      "img": "https://randomuser.me/api/portraits/women/17.jpg",
+      "banner":
+      "https://cdn.searchenginejournal.com/wp-content/uploads/2019/05/facebookvideoranking.png",
+      "dec":
+      "Our goal with News Feed is to show you the stories that matter most to you, every time you visit Facebook.",
+      "date": DateTime.now(),
+      "like": false,
+    },
+  ];
+
   @override
   Widget build(BuildContext context) {
+    var count =
+        Provider.of<FeedProvider>(context, listen: false).feedList.length;
     return Scaffold(
       appBar: AppBar(
         title: Text("News Feed"),
+        actions: [
+          Center(
+            child: Text(
+              "$count",
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+          SizedBox(width: 20),
+        ],
       ),
       body: ListView.builder(
         padding: EdgeInsets.all(15),
-        itemCount: 5,
+        itemCount: dataList.length,
         itemBuilder: (BuildContext context, int index) {
           return Container(
             padding: EdgeInsets.only(bottom: 10),
@@ -27,7 +83,7 @@ class _NewsFeedState extends State<NewsFeed> {
                   children: [
                     ClipOval(
                       child: Image.network(
-                        "https://randomuser.me/api/portraits/women/17.jpg",
+                        "${dataList[index]["img"]}",
                         height: 40,
                       ),
                     ),
@@ -36,14 +92,14 @@ class _NewsFeedState extends State<NewsFeed> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Kapil R Singh",
+                          "${dataList[index]["name"]}",
                           style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.w600,
                           ),
                         ),
                         Text(
-                          "2 min",
+                          "${dataList[index]["date"]}",
                           style: TextStyle(
                             fontSize: 12,
                             fontWeight: FontWeight.w600,
@@ -56,7 +112,7 @@ class _NewsFeedState extends State<NewsFeed> {
                 ),
                 SizedBox(height: 10),
                 Text(
-                  "Our goal with News Feed is to show you the stories that matter most to you, every time you visit Facebook.",
+                  "${dataList[index]["dec"]}",
                   style: TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.w600,
@@ -66,16 +122,31 @@ class _NewsFeedState extends State<NewsFeed> {
                 ClipRRect(
                   borderRadius: BorderRadius.circular(10),
                   child: Image.network(
-                    "https://cdn.searchenginejournal.com/wp-content/uploads/2019/05/facebookvideoranking.png",
+                    "${dataList[index]["banner"]}",
                   ),
                 ),
                 SizedBox(height: 10),
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Image.asset(
-                      "assets/like.png",
-                      height: 24,
+                    IconButton(
+                      icon: Icon(
+                        Icons.thumb_up,
+                        color: dataList[index]["like"] ? Colors.blue : Colors.grey,
+                      ),
+                      onPressed: (){
+                        setState(() {
+                          dataList[index]["like"] = !dataList[index]["like"];
+                        });
+                        Feed feed = Feed(feedId: dataList[index]["id"], userId: dataList[index]["userId"]);
+                        if(dataList[index]["like"]) {
+                          Provider.of<FeedProvider>(context, listen: false)
+                              .addFeedLike(feed);
+                        } else {
+                          Provider.of<FeedProvider>(context, listen: false)
+                              .removeFeedLike(feed);
+                        }
+                      },
                     ),
                     SizedBox(width: 10),
                     Text(
@@ -106,7 +177,7 @@ class _NewsFeedState extends State<NewsFeed> {
         },
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: (){
+        onPressed: () {
           Navigator.pushNamed(context, '/addNewsFeed');
         },
         child: Icon(Icons.add),

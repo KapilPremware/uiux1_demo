@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:uiux1_demo/provider/app_provider.dart';
+import 'package:uiux1_demo/provider/feed_provider.dart';
 import 'package:uiux1_demo/screens/dashboard.dart';
 import 'package:uiux1_demo/screens/news_feed/add_news_feed.dart';
 import 'package:uiux1_demo/screens/news_feed/news_feed.dart';
@@ -14,33 +16,56 @@ import 'package:uiux1_demo/screens/refer.dart';
 import 'package:uiux1_demo/screens/withdraw.dart';
 import 'package:uiux1_demo/screens/notification.dart';
 import 'package:uiux1_demo/screens/sqflite_localdb/sqflite_localdb.dart';
+import 'package:provider/provider.dart';
 
-void main() => runApp(MyApp());
+void main() {
+  //for multi Provider
+  Provider.debugCheckInvalidValueType = null;
+  WidgetsFlutterBinding.ensureInitialized();
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
+  final _app = AppProvider();
+  final _feed = FeedProvider();
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: "UIUX Demo",
-      initialRoute: '/',
-      routes: {
-        '/' : (context) => Dashboard(),
-        '/taskScreen' : (context) => TaskScreen(),
-        '/newsFeed' : (context) => NewsFeed(),
-        '/addNewsFeed' : (context) => AddNewsFeed(),
-        '/story' : (context) => Story(),
-        '/memberSearch' : (context) => MemberSearch(),
-        '/scrollToLoad' : (context) => ScrollToLoad(),
-        '/avatarSelection' : (context) => AvatarSelection(),
-        '/sliverAppbar' : (context) => SliverAppBarScreen(),
-        '/appBarTabBar' : (context) => AppBarTabBar(),
-        '/scratchList' : (context) => ScratchList(),
-        '/refer' : (context) => Refer(),
-        '/withdraw' : (context) => Withdraw(),
-        '/notification' : (context) => AppNotification(),
-        '/sqfLite_localdb' : (context) => SQFLiteLocalDB(),
-      },
+    return ChangeNotifierProvider<AppProvider>.value(
+      value: _app,
+      child: Consumer<AppProvider>(
+          builder: (context, value, child) {
+            return MultiProvider(
+              providers: [
+                Provider<FeedProvider>.value(value: _feed),
+
+                ChangeNotifierProvider(create: (_) => FeedProvider()),
+              ],
+              child: MaterialApp(
+                debugShowCheckedModeBanner: false,
+                title: "UIUX Demo",
+                initialRoute: '/',
+                routes: {
+                  '/' : (context) => Dashboard(),
+                  '/taskScreen' : (context) => TaskScreen(),
+                  '/newsFeed' : (context) => NewsFeed(),
+                  '/addNewsFeed' : (context) => AddNewsFeed(),
+                  '/story' : (context) => Story(),
+                  '/memberSearch' : (context) => MemberSearch(),
+                  '/scrollToLoad' : (context) => ScrollToLoad(),
+                  '/avatarSelection' : (context) => AvatarSelection(),
+                  '/sliverAppbar' : (context) => SliverAppBarScreen(),
+                  '/appBarTabBar' : (context) => AppBarTabBar(),
+                  '/scratchList' : (context) => ScratchList(),
+                  '/refer' : (context) => Refer(),
+                  '/withdraw' : (context) => Withdraw(),
+                  '/notification' : (context) => AppNotification(),
+                  '/sqfLite_localdb' : (context) => SQFLiteLocalDB(),
+                },
+              ),
+            );
+          }
+      ),
     );
   }
 }
