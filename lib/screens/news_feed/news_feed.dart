@@ -13,7 +13,7 @@ class _NewsFeedState extends State<NewsFeed> {
   List dataList = [
     {
       "id": "1",
-      "userId" : "1",
+      "userId": "1",
       "name": "Kapil R Singh",
       "img": "https://randomuser.me/api/portraits/women/17.jpg",
       "banner":
@@ -25,25 +25,25 @@ class _NewsFeedState extends State<NewsFeed> {
     },
     {
       "id": "2",
-      "userId" : "1",
+      "userId": "1",
       "name": "Kapil R Singh",
       "img": "https://randomuser.me/api/portraits/women/17.jpg",
       "banner":
-      "https://cdn.searchenginejournal.com/wp-content/uploads/2019/05/facebookvideoranking.png",
+          "https://cdn.searchenginejournal.com/wp-content/uploads/2019/05/facebookvideoranking.png",
       "dec":
-      "Our goal with News Feed is to show you the stories that matter most to you, every time you visit Facebook.",
+          "Our goal with News Feed is to show you the stories that matter most to you, every time you visit Facebook.",
       "date": DateTime.now(),
       "like": false,
     },
     {
       "id": "3",
-      "userId" : "2",
+      "userId": "2",
       "name": "Kapil R Singh",
       "img": "https://randomuser.me/api/portraits/women/17.jpg",
       "banner":
-      "https://cdn.searchenginejournal.com/wp-content/uploads/2019/05/facebookvideoranking.png",
+          "https://cdn.searchenginejournal.com/wp-content/uploads/2019/05/facebookvideoranking.png",
       "dec":
-      "Our goal with News Feed is to show you the stories that matter most to you, every time you visit Facebook.",
+          "Our goal with News Feed is to show you the stories that matter most to you, every time you visit Facebook.",
       "date": DateTime.now(),
       "like": false,
     },
@@ -88,26 +88,142 @@ class _NewsFeedState extends State<NewsFeed> {
                       ),
                     ),
                     SizedBox(width: 10),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "${dataList[index]["name"]}",
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.w600,
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "${dataList[index]["name"]}",
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.w600,
+                            ),
                           ),
-                        ),
-                        Text(
-                          "${dataList[index]["date"]}",
-                          style: TextStyle(
-                            fontSize: 12,
-                            fontWeight: FontWeight.w600,
-                            color: Colors.grey,
+                          Text(
+                            "${dataList[index]["date"]}",
+                            style: TextStyle(
+                              fontSize: 12,
+                              fontWeight: FontWeight.w600,
+                              color: Colors.grey,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    PopupMenuButton(
+                      onSelected: (value) {
+                        showDialog(
+                          context: context,
+                          builder: (context) {
+                            return Dialog(
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+                              elevation: 16,
+                              child: Container(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.all(20),
+                                      child: Text("Help us understand the issue with this post", style: TextStyle(fontSize: 12,fontWeight: FontWeight.w600,),),
+                                    ),
+                                    Container(
+                                      width: MediaQuery.of(context).size.width,
+                                      padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 10,),
+                                      decoration: BoxDecoration(
+                                        border: Border(
+                                          bottom: BorderSide(color: Colors.grey[400]),
+                                        )
+                                      ),
+                                      child: Text(
+                                        "I don't like it",
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w400,
+                                        ),
+                                      ),
+                                    ),
+                                    Container(
+                                      width: MediaQuery.of(context).size.width,
+                                      padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 10,),
+                                      decoration: BoxDecoration(
+                                        border: Border(
+                                          bottom: BorderSide(color: Colors.grey[400]),
+                                        )
+                                      ),
+                                      child: Text(
+                                        "It's harassing me or a friend",
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w400,
+                                        ),
+                                      ),
+                                    ),
+                                    Container(
+                                      width: MediaQuery.of(context).size.width,
+                                      padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 10,),
+                                      decoration: BoxDecoration(
+                                          border: Border(
+                                            bottom: BorderSide(color: Colors.grey[400]),
+                                          )
+                                      ),
+                                      child: Text(
+                                        "This account may be hacked",
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w400,
+                                        ),
+                                      ),
+                                    ),
+                                    Container(
+                                      width: MediaQuery.of(context).size.width,
+                                      padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 10,),
+                                      decoration: BoxDecoration(
+                                          border: Border(
+                                            bottom: BorderSide(color: Colors.grey[400]),
+                                          )
+                                      ),
+                                      child: Text(
+                                        "Spam or Scam",
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w400,
+                                        ),
+                                      ),
+                                    ),
+                                    Container(
+                                      width: MediaQuery.of(context).size.width,
+                                      padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 10,),
+                                      child: Text(
+                                        "Sexually explicit content",
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w400,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            );
+                          },
+                        );
+                      },
+                      itemBuilder: (context) => [
+                        PopupMenuItem(
+                          value: 1,
+                          child: Row(
+                            children: <Widget>[
+                              Padding(
+                                padding: const EdgeInsets.fromLTRB(2, 2, 8, 2),
+                                child: Icon(Icons.print),
+                              ),
+                              Text('Print')
+                            ],
                           ),
                         ),
                       ],
-                    )
+                    ),
                   ],
                 ),
                 SizedBox(height: 10),
@@ -132,14 +248,17 @@ class _NewsFeedState extends State<NewsFeed> {
                     IconButton(
                       icon: Icon(
                         Icons.thumb_up,
-                        color: dataList[index]["like"] ? Colors.blue : Colors.grey,
+                        color:
+                            dataList[index]["like"] ? Colors.blue : Colors.grey,
                       ),
-                      onPressed: (){
+                      onPressed: () {
                         setState(() {
                           dataList[index]["like"] = !dataList[index]["like"];
                         });
-                        Feed feed = Feed(feedId: dataList[index]["id"], userId: dataList[index]["userId"]);
-                        if(dataList[index]["like"]) {
+                        Feed feed = Feed(
+                            feedId: dataList[index]["id"],
+                            userId: dataList[index]["userId"]);
+                        if (dataList[index]["like"]) {
                           Provider.of<FeedProvider>(context, listen: false)
                               .addFeedLike(feed);
                         } else {
