@@ -16,12 +16,19 @@ import 'package:uiux1_demo/screens/refer.dart';
 import 'package:uiux1_demo/screens/withdraw.dart';
 import 'package:uiux1_demo/screens/notification.dart';
 import 'package:uiux1_demo/screens/sqflite_localdb/sqflite_localdb.dart';
+import 'package:uiux1_demo/screens/hive_localdb/hive.dart';
 import 'package:provider/provider.dart';
 
-void main() {
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+
+void main() async{
   //for multi Provider
   Provider.debugCheckInvalidValueType = null;
   WidgetsFlutterBinding.ensureInitialized();
+
+  //hive init
+  await Hive.initFlutter();
   runApp(MyApp());
 }
 
@@ -61,6 +68,7 @@ class MyApp extends StatelessWidget {
                   '/withdraw' : (context) => Withdraw(),
                   '/notification' : (context) => AppNotification(),
                   '/sqfLite_localdb' : (context) => SQFLiteLocalDB(),
+                  '/hive' : (context) => HiveDemo(),
                 },
               ),
             );

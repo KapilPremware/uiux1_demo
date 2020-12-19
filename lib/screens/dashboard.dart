@@ -240,6 +240,23 @@ class _DashboardState extends State<Dashboard> {
                 ),
               ),
             ),
+            InkWell(
+              onTap: (){
+                Navigator.pushNamed(context, '/hive');
+              },
+              child: Container(
+                padding: EdgeInsets.all(20),
+                color: Colors.blueAccent,
+                child: Text(
+                  "Hive DB Demo",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w600,
+                    fontSize: 18,
+                  ),
+                ),
+              ),
+            ),
           ],
         ),
       ),
