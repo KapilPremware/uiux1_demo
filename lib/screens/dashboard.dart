@@ -124,6 +124,23 @@ class _DashboardState extends State<Dashboard> {
               ),
               InkWell(
                 onTap: (){
+                  Navigator.pushNamed(context, '/avatarSelectionNew');
+                },
+                child: Container(
+                  padding: EdgeInsets.all(20),
+                  color: Colors.blueAccent,
+                  child: Text(
+                    "Avatar 2",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w600,
+                      fontSize: 18,
+                    ),
+                  ),
+                ),
+              ),
+              InkWell(
+                onTap: (){
                   Navigator.pushNamed(context, '/sliverAppbar');
                 },
                 child: Container(

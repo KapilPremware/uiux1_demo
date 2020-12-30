@@ -9,6 +9,7 @@ import 'package:uiux1_demo/screens/task_screen.dart';
 import 'package:uiux1_demo/screens/member_search.dart';
 import 'package:uiux1_demo/screens/scroll_to_load.dart';
 import 'package:uiux1_demo/screens/avatar_selection.dart';
+import 'package:uiux1_demo/screens/avatar_selection_new.dart';
 import 'package:uiux1_demo/screens/sliver_appbar.dart';
 import 'package:uiux1_demo/screens/appbar_tabbar.dart';
 import 'package:uiux1_demo/screens/scratch_list.dart';
@@ -61,6 +62,7 @@ class MyApp extends StatelessWidget {
                   '/memberSearch' : (context) => MemberSearch(),
                   '/scrollToLoad' : (context) => ScrollToLoad(),
                   '/avatarSelection' : (context) => AvatarSelection(),
+                  '/avatarSelectionNew' : (context) => AvatarSelectionNew(),
                   '/sliverAppbar' : (context) => SliverAppBarScreen(),
                   '/appBarTabBar' : (context) => AppBarTabBar(),
                   '/scratchList' : (context) => ScratchList(),
