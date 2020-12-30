@@ -10,7 +10,7 @@ class _AvatarSelectionNewState extends State<AvatarSelectionNew>
     with TickerProviderStateMixin {
   TabController _tabController;
   String selectedAvatar = 'assets/avatar/1.png';
-  String selectedFrame = 'assets/frame/frame1.png';
+  String selectedFrame = 'assets/frame/frame7.png';
 
   @override
   void initState() {
