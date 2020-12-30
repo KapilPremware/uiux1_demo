@@ -18,6 +18,7 @@ import 'package:uiux1_demo/screens/withdraw.dart';
 import 'package:uiux1_demo/screens/notification.dart';
 import 'package:uiux1_demo/screens/sqflite_localdb/sqflite_localdb.dart';
 import 'package:uiux1_demo/screens/hive_localdb/hive.dart';
+import 'package:uiux1_demo/screens/share_earn.dart';
 import 'package:provider/provider.dart';
 
 import 'package:hive/hive.dart';
@@ -71,6 +72,7 @@ class MyApp extends StatelessWidget {
                   '/notification' : (context) => AppNotification(),
                   '/sqfLite_localdb' : (context) => SQFLiteLocalDB(),
                   '/hive' : (context) => HiveDemo(),
+                  '/shareEarn' : (context) => ShareEarn(),
                 },
               ),
             );
